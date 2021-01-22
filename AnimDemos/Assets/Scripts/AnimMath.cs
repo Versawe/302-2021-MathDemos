@@ -22,11 +22,25 @@ public static class AnimMath
             if (p > 1) p = 1;
         }
         return (max - min) * p + min;
+    }
 
-        /*float x = Lerp(min.x, max.x, p);
-        float y = Lerp(min.y, max.y, p);
-        float z = Lerp(min.z, max.z, p);
+    public static float Slide(float curr, float target, float percentLeftAfter1)
+    {
+        float p = 1 - Mathf.Pow(percentLeftAfter1, Time.deltaTime);
+        return AnimMath.Lerp(curr, target, p);
+    }
+    public static Vector3 Slide(Vector3 curr, Vector3 target, float percentLeftAfter1)
+    {
+        float p = 1 - Mathf.Pow(percentLeftAfter1, Time.deltaTime);
+        return AnimMath.Lerp(curr, target, p);
+    }
 
-        return new Vector3(x, y, z);*/
+    public static Vector3 SpotOnCircleXZ(float radius, float currentAngle)
+    {
+        Vector3 offset = new Vector3();
+        offset.x = Mathf.Sin(currentAngle) * radius;
+        offset.z = Mathf.Cos(currentAngle) * radius;
+
+        return offset;
     }
 }
