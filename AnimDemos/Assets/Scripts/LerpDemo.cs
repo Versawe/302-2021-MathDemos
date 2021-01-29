@@ -15,6 +15,13 @@ public class LerpDemo : MonoBehaviour
 
     public AnimationCurve animationCurve;
     
+    public float getCurrentPercent
+    {
+        get
+        {
+            return animationPlayheadTime / animationLength;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +37,7 @@ public class LerpDemo : MonoBehaviour
             //move playhead forward
             animationPlayheadTime += Time.deltaTime;
             //calc new value for percent
-            percent = animationPlayheadTime / animationLength;
+            percent = getCurrentPercent;
             //clamp percent value
             percent = Mathf.Clamp(percent, 0, 1);
 
@@ -45,7 +52,7 @@ public class LerpDemo : MonoBehaviour
         
     }
 
-    private void DoTheLerp(float p)
+    public void DoTheLerp(float p)
     {
         transform.position = AnimMath.Lerp(posA.position, posB.position, p);
     }
